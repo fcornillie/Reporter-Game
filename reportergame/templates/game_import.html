@@ -1,0 +1,22 @@
+﻿{% extends "base_plain.html" %}
+
+{% block content %}
+<div>
+	<h2>Import a game script</h2>
+	{% if message %}<span style="color:red;">{{ message }}<br/></span>{% endif %}
+	Syntax:
+	<p style="font-size:10px;">
+	<br/>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE OF GAME<span style="color:blue;">|SUBTITLE|GEOLOC|GEOZOOM|START_XP</span>
+	<br/>2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---
+	<br/>3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
+	<br/><span style="color:blue;">OPTIONAL</span>
+	</p>
+	
+	<br/><br/><form action="/admin/import_game" method="post">
+		<textarea rows="20" cols="70" name="game_script">The Guardian|...|51.500152,-0.126236|14|100
+---
+		</textarea>
+		<br/><input type="submit" value="Import" />
+	</form>
+</div>
+{% endblock %}

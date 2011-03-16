@@ -1,0 +1,30 @@
+<div id="leaderboardframe">
+	<!--ul><li><div class="header" style="float:left;">Nickname</div><div class="header" style="float:right;">score<div></li></ul-->
+	<div id="leaderboard">
+	HIGH SCORES<br/>
+	{% for s in sessions %}
+		<a href="/profile?game={{ game_key }}&amp;player={{ s.player.key }}">{{ s.player.nickname }}</a>
+		
+	{% endfor %}
+	</div>
+</div>	
+<script>	
+$(document).ready(function() {
+		updateleaderboard();
+		setInterval ( "updateleaderboard()", 5000 );
+});
+
+function updateleaderboard ( )
+	{
+	$.ajax({
+			      url: '/get_player_leaderboard',
+			      success: function(data) {
+				$('#leaderboard').html(data);
+				
+			      }
+		      });
+	}
+            
+
+
+</script>	

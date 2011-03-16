@@ -1,0 +1,105 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* reset */
+html, body, div, ol, ul, li, h1, h2, h3, h4, h5, h6, form,
+ul li {list-style:disc;}
+ol li {list-style:disc;}
+p{margin:0;padding:0;} 
+
+img {
+	border: 0px;
+}
+
+/* html & body */
+
+html {
+
+}
+
+body {
+	color: #333; /*#007d3e;*/
+	margin: 0;
+	background-color: #eeeeee;
+}
+
+#container {
+	padding: 0px;
+	width: 900px;
+	margin: 0 auto;
+	font-family:Helvetica,Arial,Verdana,sans-serif;
+	font-size: 14px;
+	line-height: 1.5em;
+}
+
+/* main blocks */
+
+#header {
+	height: 80px;
+}
+
+#content {
+	float:left;
+	clear:both;
+	width:600px;
+	border:2px solid #666;
+	padding: 5px 10px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color: #fff;
+}
+
+#content_right {
+	margin-left:20px;
+	width:250px;
+	display:block;
+	float:right;
+}
+
+#player_score {
+	border:2px solid #666;
+	padding: 5px 10px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color: #fff;
+}
+
+.currencies {
+	font-family: 'Quadra';
+	font-size: 28px;
+	color: #666;
+}
+
+#currencies {
+
+}
+
+#currencies div {
+	margin: 10px 0px;
+}
+
+#currencies img {
+	vertical-align: middle;
+	margin-right: 15px;
+}
+
+#leaderboard {
+	margin-top: 20px;
+	border:2px solid #fff;
+	padding: 5px 10px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color: #666;
+	color: white;
+}
+#leaderboard div.nick {
+	color: #fff;
+}
+#leaderboard div.nick a {
+	color: #fff;
+	text-decoration: none;
+}
+#leaderboard div.nick a:hover {
+	color: #fff;
+	text-decoration: underline;
+}

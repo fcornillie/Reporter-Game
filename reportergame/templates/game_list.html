@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>	
+	<h2>Games</h2>
+	{% for g in games %}
+		<a href="/play_game?game={{ g.key }}"><h3>{{ g.title }}</h3></a>
+		<i>{{ g.teaser }}<br/></i>
+	{% endfor %}
+</div>		
+{% endblock %}
