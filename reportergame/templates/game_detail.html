@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block header %}
-<a href="/play_game?game={{ game_key }}">
+<a href="/game?game={{ game_key }}">
 <h1>{{ game.title }}</h1>
 <h2>{{ game.subtitle }}</h2>
 </a>
@@ -9,11 +9,16 @@
 
 {% block content_right %}
 
-	<div id="player_score">
-		Hi <a href="/profile?game={{ game_key}}">{{ player.nickname }}</a> ! <a href="{{logouturl}}">(logout)</a>
-		<div id="currencies" class="currencies"></div>
+	{% include "block_player_score.html" %}
+	
+	<div id="stories" class="block">
+		<b>STORIES</b>
+		{% for story in game.stories %}
+			<div><a href="/story?story={{ story.key }}">{{ story.headline|truncatewords:5 }}</a></div>
+		{% endfor %}
 	</div>
-	{% include "leaderboard.html" %}
+	
+	{% include "block_leaderboard.html" %}
 
 {% endblock %}
 
@@ -37,25 +42,25 @@ border-bottom:1px solid black;
 		function initMap() {
 			var latlng = new google.maps.LatLng({{ game.maps_location }});
 			var myOptions = {
-				zoom: 12,
+				zoom: {{ game.maps_zoom }},
 				center: latlng,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
 		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 		
-		{% for c in conversations %}
-			var latlng{{forloop.counter}} = new google.maps.LatLng({{c.maps_location}});
-			var Mmarker{{forloop.counter}} = new google.maps.Marker({
-				position: latlng{{forloop.counter}},
+		{% for s in game.stories %}
+			var latlng{{ forloop.counter }} = new google.maps.LatLng({{ s.maps_location }});
+			var Mmarker{{ forloop.counter }} = new google.maps.Marker({
+				position: latlng{{ forloop.counter }},
 				map: map,
-				title:"{{ c.title }}"
+				title:"{{ s.headline }}"
 			});
-			infocontent{{forloop.counter}} = "foo";
-			var infowindow{{forloop.counter}} = new google.maps.InfoWindow({
-				content: infocontent{{forloop.counter}}
+			infocontent{{ forloop.counter }} = "{{ s.headline }}";
+			var infowindow{{ forloop.counter }} = new google.maps.InfoWindow({
+				content: infocontent{{ forloop.counter }}
 			});
-			google.maps.event.addListener(Mmarker{{forloop.counter}}, 'click', function() {
-				infowindow{{forloop.counter}}.open(map,Mmarker{{forloop.counter}});
+			google.maps.event.addListener(Mmarker{{ forloop.counter }}, 'click', function() {
+				infowindow{{ forloop.counter }}.open(map,Mmarker{{ forloop.counter }});
 			});
 		{% endfor %}
 	}

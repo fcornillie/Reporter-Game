@@ -26,7 +26,7 @@ from helpers import *
 # MAIN VIEWS
 # **********
 
-class play_game(webapp.RequestHandler):
+class get_game(webapp.RequestHandler):
 	"""
 	Returns a Django template for one game.
 	
@@ -45,12 +45,34 @@ class play_game(webapp.RequestHandler):
 			if games.count() > 0:
 				game = Game.all()[0]
 
-			template_values = {
-				'game':game,
-			}
-			
-			path = os.path.join(os.path.dirname(__file__), 'templates/game_detail.html')
-			self.response.out.write(template.render(path, append_base_template_values(template_values)))
+		template_values = {
+			'game':game,
+		}
+		
+		path = os.path.join(os.path.dirname(__file__), 'templates/game_detail.html')
+		self.response.out.write(template.render(path, append_base_template_values(template_values)))
+
+class get_story(webapp.RequestHandler):
+	"""
+	Returns a Django template for one story.
+	
+	Requires the following parameters:
+	- story: the key of the story
+	"""
+	
+	@login_required
+	def get(self):
+		player = get_current_player()
+		story = None
+		if self.request.get('story'):
+			story = Story.get(self.request.get('story'))
+		
+		template_values = {
+			'story':story,
+		}
+		
+		path = os.path.join(os.path.dirname(__file__), 'templates/story_detail.html')
+		self.response.out.write(template.render(path, append_base_template_values(template_values)))
 
 class get_player_score(webapp.RequestHandler):
 	""" Returns the current player score for a particular game in JSON format """
@@ -81,8 +103,8 @@ class MainHandler(webapp.RequestHandler):
 		player = get_current_player()
 		if player == None:
 			player = Player(user=users.get_current_user())
-			player.put()	
-		self.redirect("/play_game")
+			player.put()
+		self.redirect("/game")
 
 # **********
 # MAIN
@@ -91,9 +113,10 @@ class MainHandler(webapp.RequestHandler):
 def main():
 	logging.getLogger().setLevel(logging.DEBUG)
 	application = webapp.WSGIApplication([('/', MainHandler),
-										('/get_player_score',get_player_score),
-										('/get_player_leaderboard',get_player_leaderboard),
-										('/play_game',play_game),
+										('/get_player_score', get_player_score),
+										('/get_player_leaderboard', get_player_leaderboard),
+										('/game', get_game),
+										('/story', get_story),
 								],
 											debug=True)
 

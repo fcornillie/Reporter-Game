@@ -63,6 +63,21 @@ class import_game(webapp.RequestHandler):
 					g.maps_zoom = int(g_raw_header.split("|")[3])
 					g.start_xp = int(g_raw_header.split("|")[4])
 					g.put()
+				
+				for minigame in g_raw[1].strip().splitlines():
+					minigame_vals = minigame.split("|")
+					mg = MiniGame(title=minigame_vals[0])
+					mg.put()
+				
+				for story in g_raw[2].strip().splitlines():
+					story_vals = story.split("|")
+					s = Story(game=g)
+					s.headline = story_vals[0]
+					s.text = story_vals[1]
+					s.maps_location = story_vals[2]
+					for mg_id in story_vals[3].split(";"):
+						s.minigames_list.append(MiniGame.all().filter("title", mg_id)[0].key())
+					s.put()
 					
 				message = """Game has been successfully imported ... [ <a href='/_ah/login?&continue=/&action=Logout'>logout</a> ]"""
 

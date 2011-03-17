@@ -127,19 +127,28 @@ class Game(db.Model):
 	start_xp = db.IntegerProperty(default=0)
 	admin_only = db.BooleanProperty(default=False)
 
-class Mission(db.Model):
+class MiniGame(db.Model):
 	title = db.StringProperty()
-	article = db.TextProperty()
+
+class Story(db.Model):
+	game = db.ReferenceProperty(Game, collection_name="stories")
+	title = db.StringProperty()
+	headline = db.StringProperty()
+	text = db.TextProperty()
 	maps_location = db.GeoPtProperty()
 	maps_zoom = db.IntegerProperty()
+	minigames_list = db.ListProperty(db.Key)
 	timestamp = db.DateTimeProperty(auto_now_add=True)
 	
+	@property
+	def minigames(self):
+		return MiniGame.get(self.minigames_list)
+
 class GameSession(db.Model):
 	from datetime import datetime
 	
 	game = db.ReferenceProperty(Game, required=True, collection_name="sessions")
 	player = db.ReferenceProperty(Player, required=True, collection_name="sessions")
-	missions = db.ReferenceProperty(Mission)
 	_xp = db.IntegerProperty(default=0)
 	badges_list = db.ListProperty(db.Key)
 	absolutescore = db.IntegerProperty(default=1)

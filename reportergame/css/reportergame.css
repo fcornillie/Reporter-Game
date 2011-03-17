@@ -56,16 +56,35 @@ body {
 	float:right;
 }
 
-#player_score {
+div.block {
 	border:2px solid #666;
 	padding: 5px 10px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	background-color: #fff;
+	color: #666;
+	margin-bottom: 20px;
 }
 
+#player_score {
+
+}
+
+#leaderboard {
+
+}
+
+#stories {
+
+}
+
+#map {
+
+}
+
+/* misc */
+
 .currencies {
-	font-family: 'Quadra';
 	font-size: 28px;
 	color: #666;
 }
@@ -81,25 +100,4 @@ body {
 #currencies img {
 	vertical-align: middle;
 	margin-right: 15px;
-}
-
-#leaderboard {
-	margin-top: 20px;
-	border:2px solid #fff;
-	padding: 5px 10px;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-	background-color: #666;
-	color: white;
-}
-#leaderboard div.nick {
-	color: #fff;
-}
-#leaderboard div.nick a {
-	color: #fff;
-	text-decoration: none;
-}
-#leaderboard div.nick a:hover {
-	color: #fff;
-	text-decoration: underline;
 }
