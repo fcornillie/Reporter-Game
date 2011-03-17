@@ -1,5 +1,5 @@
 function fillInScore( score ) {
-	var strHTML = "<div><img src='/img/game_art/xp_30.png' title='Your experience points.'/> " + score.xp + "</div>";
+	var strHTML = "<div>readers: " + score.xp + "</div><div>articles written: XXX</div><div>articles edited: XXX</div><div>badges: XXX</div><div>inventory: XXX</div>";
 	$("#currencies").html(strHTML);
 }
 
