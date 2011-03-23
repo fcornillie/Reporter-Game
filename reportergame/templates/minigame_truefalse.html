@@ -1,0 +1,52 @@
+﻿{% extends "base.html" %}
+
+{% block content_right %}
+
+	{% include "block_player_score.html" %}
+	
+	<div id="rewards" class="block">
+		<b>REWARDS</b>
+		<br/>reward1<br/>reward2<br/>rewardx
+	</div>
+
+{% endblock %}
+
+{% block content %}
+
+	<div id="twitter">
+		<h2>{{ minigame.instruction }}</h2>
+		{% for item in minigame.items %}
+			<div class="item" value="{{ item.value }}"><div class="avatar"></div><div class="message">{{ item.text }}</div><div class="clearfloat"></div></div>
+		{% endfor %}
+		
+		<script type="text/javascript">
+			$("div.item").hover(
+				function() {
+					$(this).addClass("retweet");
+				},
+				function() {
+					$(this).removeClass("retweet");
+				}
+			);
+			$("div.item").click(
+				function() {
+					if (!$(this).find('div.message').hasClass("retweeted")) {
+						// scoring
+						var value = parseFloat($(this).attr("value"));
+						var score_readers = parseFloat($("div#currencies div#readers span.score").html());
+						var new_score_readers = score_readers + value;
+						$("div#currencies div#readers span.score").html(new_score_readers);
+						
+						// some visual feedback
+						if(value==1) {
+							$(this).addClass("correct");
+						} else if(value==-1) {
+							$(this).addClass("incorrect");
+						}
+						$(this).find('div.message').addClass("retweeted");
+					}
+			});
+		</script>
+	</div>
+
+{% endblock %}
