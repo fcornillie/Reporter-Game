@@ -73,6 +73,34 @@ class get_story(webapp.RequestHandler):
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/story_detail.html')
 		self.response.out.write(template.render(path, append_base_template_values(template_values)))
+		
+class get_minigame(webapp.RequestHandler):
+	"""
+	Returns an HTML template for a minigame.
+	
+	Requires the following parameters:
+	- type: the type of the minigame (truefalse, ...)
+	"""
+	
+	@login_required
+	def get(self):
+		minigame_type = self.request.get('type')
+		
+		# get content
+		import content
+		if minigame_type == "truefalse":
+			minigame = content.truefalse_en_countable_uncountable
+		
+		# shuffle items
+		from random import shuffle
+		shuffle(minigame['items'])
+		
+		# generate template
+		template_values = {
+			'minigame': minigame,
+		}
+		path = os.path.join(os.path.dirname(__file__), 'templates/minigame_' + minigame_type + '.html')
+		self.response.out.write(template.render(path, append_base_template_values(template_values)))
 
 class get_player_score(webapp.RequestHandler):
 	""" Returns the current player score for a particular game in JSON format """
@@ -117,6 +145,7 @@ def main():
 										('/get_player_leaderboard', get_player_leaderboard),
 										('/game', get_game),
 										('/story', get_story),
+										('/minigame', get_minigame),
 								],
 											debug=True)
 

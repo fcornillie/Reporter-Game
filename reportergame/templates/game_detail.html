@@ -63,15 +63,10 @@ border-bottom:1px solid black;
 				infowindow{{ forloop.counter }}.open(map,Mmarker{{ forloop.counter }});
 			});
 		{% endfor %}
-	}
+		}
+	
+		$(document).ready(function() {initMap();});
 	</script>
 </div>
-
-<script>
-$(document).ready(function() {
-	getPlayerScore();
-	initMap();
-});
-</script>
 
 {% endblock %}

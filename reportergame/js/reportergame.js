@@ -1,5 +1,8 @@
 function fillInScore( score ) {
-	var strHTML = "<div>readers: " + score.xp + "</div><div>articles written: XXX</div><div>articles edited: XXX</div><div>badges: XXX</div><div>inventory: XXX</div>";
+	var strHTML = "<div id='readers'><img src='/img/readers_30.png' title='Your current readership' /><span class='score'>" + score.xp + "</span></div>\n\
+	<div id='articles_written'><img src='/img/article_written_30.png' title='Number of articles you have written' /><span class='score'>X</span></div>\n\
+	<div id='articles_edited'><img src='/img/article_edited_30.png' title='Number of articles you have edited' /><span class='score'>X</span></div>\n\
+	<div id='inventory'><img src='/img/inventory_30.png' title='Your inventory; items you are carrying with you' /><span class='score'>X</span></div>";
 	$("#currencies").html(strHTML);
 }
 

@@ -32,6 +32,21 @@ body {
 	line-height: 1.5em;
 }
 
+/* general */
+
+@font-face {
+	font-family: 'Quadra'; 
+	src: url(m06.eot);
+	src: local('M06_QUADRA'), url(m06.TTF) format("truetype");
+}
+
+.clearfloat {
+	clear:both;
+	line-height:0px;
+	font-size:1px;
+	height:0;
+}
+
 /* main blocks */
 
 #header {
@@ -99,4 +114,49 @@ div.block {
 #currencies img {
 	vertical-align: middle;
 	margin-right: 15px;
+}
+
+/* twitter mini-game */
+
+div#twitter div.item {
+	margin: 5px 0 5px 0;
+	border-bottom: 1px solid #ccc;
+	min-height: 54px;
+}
+div#twitter div.avatar {
+	float:left;
+	width:48px;
+	height:48px;
+	background-image: url(/img/user_48.png);
+	background-repeat: no-repeat;
+}
+div#twitter div.message {
+	float:left;
+	width:530px;
+	padding: 2px 10px 2px 10px;
+}
+.retweet {
+	background-image: url(/img/retweet_button.png);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+.retweeted {
+	background-image: url(/img/retweeted.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+.correct {
+	background-image: url(/img/correct_16.png);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.incorrect {
+	background-image: url(/img/incorrect_16.png);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+span.score {
+	font-family: 'Quadra';
+	font-size: 28px;
+	color: #666;
 }
