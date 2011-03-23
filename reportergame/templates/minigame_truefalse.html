@@ -22,10 +22,14 @@
 		<script type="text/javascript">
 			$("div.item").hover(
 				function() {
-					$(this).addClass("retweet");
+					if (!$(this).find('div.message').hasClass("retweeted")) {
+						$(this).addClass("retweet");
+					}
 				},
 				function() {
-					$(this).removeClass("retweet");
+					if (!$(this).find('div.message').hasClass("retweeted")) {
+						$(this).removeClass("retweet");
+					}
 				}
 			);
 			$("div.item").click(
@@ -43,6 +47,7 @@
 						} else if(value==-1) {
 							$(this).addClass("incorrect");
 						}
+						$(this).removeClass("retweet");
 						$(this).find('div.message').addClass("retweeted");
 					}
 			});

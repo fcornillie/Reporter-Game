@@ -139,6 +139,7 @@ div#twitter div.message {
 	background-image: url(/img/retweet_button.png);
 	background-repeat: no-repeat;
 	background-position: right;
+	background-color: #ddd;
 }
 .retweeted {
 	background-image: url(/img/retweeted.png);
