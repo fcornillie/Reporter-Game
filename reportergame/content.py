@@ -69,3 +69,13 @@ truefalse_en_countable_uncountable = {
 		{'value':-1, 'text':'flour'}, 
 	]
 }
+
+fib_en_tenses = {
+	'instruction': 'Complete the sentences by using the information in the hashtags.',
+	'items': [
+		{'context': ('I ', ' for BLCC ', ' 2001.'), 'hints': ('work', 'since'), 'correct_responses': ('I have worked for BLCC since 2001.', 'I have been working for BLCC since 2001.')},
+		{'context': ('I ', ' a fax to the customers.'), 'hints': ('send', 'just'), 'correct_responses': ('I have just sent a fax to the customers.', )},
+		{'context': ('I ', ' to the personnel department this morning.'), 'hints': ('be', ), 'correct_responses': ('I have been to the personnel department this morning.', )},
+		{'context': ('I ', ' in Brussels for 5 years, but moved last year.'), 'hints': ('live', ), 'correct_responses': ('I lived in Brussels for 5 years, but moved last year.', )},
+	]
+}

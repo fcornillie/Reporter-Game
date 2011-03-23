@@ -1,0 +1,18 @@
+﻿{% extends "minigame.html" %}
+
+{% block content %}
+
+	<div id="twitter">
+		<h2>{{ minigame.instruction }}</h2>
+		<textarea class='text_enter'>{{ minigame.items.0.context|join:"" }}{% for h in minigame.items.0.hints %}&nbsp;#{{ h }}{% endfor %}</textarea>
+		{% for item in minigame.items|slice:"1:" %}
+			<div class='item'><div class="avatar"></div><div class="message">{{ item.correct_responses.0 }}{% for h in item.hints %}<span class='hashtag'>&nbsp;#{{ h }}</span>{% endfor %}</div><div class="clearfloat"></div></div>
+		{% endfor %}
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("textarea.text_enter").focus();
+			});
+		</script>
+	</div>
+
+{% endblock %}

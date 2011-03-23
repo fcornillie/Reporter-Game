@@ -90,7 +90,9 @@ class get_minigame(webapp.RequestHandler):
 		import content
 		if minigame_type == "truefalse":
 			minigame = content.truefalse_en_countable_uncountable
-		
+		elif minigame_type == "fib":
+			minigame = content.fib_en_tenses
+			
 		# shuffle items
 		from random import shuffle
 		shuffle(minigame['items'])

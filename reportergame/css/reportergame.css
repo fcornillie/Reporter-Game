@@ -161,3 +161,16 @@ span.score {
 	font-size: 28px;
 	color: #666;
 }
+
+div#twitter .text_enter {
+	font-size: 12px;
+	font-family:Helvetica,Arial,Verdana,sans-serif;
+	font-size: 14px;
+	width: 600px;
+	height: 80px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+div#twitter span.hashtag {
+	color: blue;
+}
