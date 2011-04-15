@@ -89,13 +89,24 @@ class get_minigame(webapp.RequestHandler):
 		# get content
 		import content
 		if minigame_type == "truefalse":
-			minigame = content.truefalse_en_countable_uncountable
+			minigame = content.truefalse_en_dative_alternation
 		elif minigame_type == "fib":
 			minigame = content.fib_en_tenses
+		elif minigame_type == "assoc":
+			minigame = content.assoc_en_some_any
+		elif minigame_type == "empty":
+			minigame = None
+		
+		if minigame != None:
+			# shuffle items
+			from random import shuffle
+			shuffle(minigame['items'])
 			
-		# shuffle items
-		from random import shuffle
-		shuffle(minigame['items'])
+			# add characters to items
+			from random import choice
+			from content import characters
+			for i in minigame['items']:
+				i['character'] = choice(characters)
 		
 		# generate template
 		template_values = {

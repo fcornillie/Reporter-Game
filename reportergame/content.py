@@ -1,5 +1,18 @@
 ﻿# This Python file uses the following encoding: utf-8
 
+characters = [
+	('Angelina Jolie','angelina_jolie.jpg'),
+	('Barack Obama', 'barack_obama.jpg'),
+	('Bart De Wever', 'bart_de_wever.jpg'),
+	('George Clooney', 'George-Clooney.jpg'),
+	('Moammar Al Khadaffi', 'khadaffi.jpg'),
+	('Angela Merkel', 'merkel.jpg'),
+	('Phara de Aguirre', 'phara.jpg'),
+	('Prins Laurent van België', 'prins_laurent.jpg'),
+	('Nicholas Sarkozy', 'sarko.jpg'),
+	('Rik Torfs', 'torfs.jpg'),
+]
+
 truefalse_fr_facturation_tarification = {
 	'instruction': 'Retweetez toutes les propositions qui sont vraies.',
 	'items': [
@@ -70,12 +83,84 @@ truefalse_en_countable_uncountable = {
 	]
 }
 
+truefalse_en_dative_alternation = {
+	'instruction': 'Retweet only the sentences in which the preposition may be dropped.<br/>Example: Mary found a job <u>for</u> Antonio > Mary found Antonio a job.',
+	'items': [
+		{'text': 'Mary found a job for Antonio.', 'value': 1} ,
+		{'text': 'Will you catch a butterfly for me?', 'value': 1} ,
+		{'text': 'John showed a photograph of his family to Susan.', 'value': 1} ,
+		{'text': 'The bird builds a nest for its chicks.', 'value': 1} ,
+		{'text': 'Jose sent a package to Sofia.', 'value': 1} ,
+		{'text': 'Margarita baked cookies for the visitors.', 'value': 1} ,
+		{'text': 'Ellen, will you pass the salt to Jane?', 'value': 1} ,
+		{'text': 'The students pronounce a new word for their teacher.', 'value': -1} ,
+		{'text': 'He bought a ring for his fianc\xe9e.', 'value': 1} ,
+		{'text': 'He fixed the lawnmower for his neighbour.', 'value': -1} ,
+		{'text': 'The artist created a sculpture for the city.', 'value': -1} ,
+		{'text': 'She introduced her new friend to her mother.', 'value': -1} ,
+		{'text': 'The teacher reported Esmeralda to the principal.', 'value': -1} ,
+		{'text': 'Phone the good news to Pablo!', 'value': 1} ,
+		{'text': 'My uncle donates a lot of money to charity.', 'value': -1} ,
+		{'text': 'Please describe your room to Fred.', 'value': -1} ,
+		{'text': 'Andrea saved some cake for her sister.', 'value': 1} ,
+		{'text': 'She sent the letters to that address.', 'value': -1} ,
+		{'text': 'Can you answer this question for the teacher?', 'value': -1} ,
+		{'text': 'I like to cook paella for my friends.', 'value': 1} ,
+		{'text': 'The lawyer explained the situation to Pam.', 'value': -1} ,
+		{'text': 'Please, close the windows for me!', 'value': -1} ,
+		{'text': 'Linda offered some beer to her husband.', 'value': 1} ,
+		{'text': 'I gave my book to Mike.', 'value': 1} ,
+		{'text': 'The poet dedicated the poem to his love.', 'value': -1} ,
+		{'text': 'You always say the same thing to everybody.', 'value': -1} ,
+		{'text': 'The engineer designed a new part for the machine.', 'value': -1} ,
+		{'text': 'The student paid the fee to the secretary.', 'value': 1} ,
+		{'text': 'The happy couple announced their engagement to the family.', 'value': -1} ,
+		{'text': 'Jane Fonda accepted the Oscar for the father.', 'value': -1} ,
+		{'text': 'The store delivered the groceries to Mr. Sanchez.', 'value': -1} ,
+		{'text': 'Steve owes a lot of money to Robert.', 'value': 1} ,
+		{'text': 'Open the door for Nina.', 'value': -1} ,
+		{'text': 'Rosie translated letters for three hours.', 'value': -1} ,
+		{'text': 'We ordered pizza for all the students.', 'value': 1} ,
+		{'text': 'Jeff mentioned the new movie to his brother.', 'value': -1} ,
+		{'text': 'The professor dictated the report to his secretary.', 'value': -1} ,
+		{'text': 'I would like to save money for a trip.', 'value': -1} ,
+		{'text': 'The salesman sold a pair of shoes to Emilio.', 'value': 1} ,
+		{'text': 'Jim carried the luggage tor Ines.', 'value': -1} ,
+		{'text': 'Ken made a bookcase for his son.', 'value': 1} ,
+		{'text': 'My mother cooks huge meals for the holidays.', 'value': -1} ,
+		{'text': 'The coordinator transferred the student to another teacher.', 'value': -1} ,
+		{'text': 'Rodrigo admitted his mistakes to his friends.', 'value': -1} ,
+		{'text': 'I told a story to Carlos.', 'value': 1} ,
+		{'text': 'Could you start the washing machine for Olga?', 'value': -1} ,
+		{'text': 'Terry Fox ran thousands of kilometres for cancer research.', 'value': -1} ,
+		{'text': 'Leave a note for your friend.', 'value': 1} ,
+		{'text': 'The engineer constructed a new highway for the city.', 'value': -1} ,
+		{'text': 'Consuelo mailed a birthday card to her grandfather.', 'value': 1} ,
+		{'text': 'I want to rent an apartment for two weeks.', 'value': -1} ,
+		{'text': 'The musician expressed his admiration for Mozart.', 'value': -1} ,
+		{'text': 'Gabriella prepared the house for Christmas.', 'value': -1} ,
+		{'text': 'The father brings baseball tickets for his son.', 'value': 1} ,
+	]
+}
+
 fib_en_tenses = {
 	'instruction': 'Complete the sentences by using the information in the hashtags.',
 	'items': [
-		{'context': ('I ', ' for BLCC ', ' 2001.'), 'hints': ('work', 'since'), 'correct_responses': ('I have worked for BLCC since 2001.', 'I have been working for BLCC since 2001.')},
+		{'context': ('I ', ' for BLCC ', ' 2-1-11.'), 'hints': ('work', 'since'), 'correct_responses': ('I have worked for BLCC since 2-1-11.', 'I have been working for BLCC since 2-1-11.')},
 		{'context': ('I ', ' a fax to the customers.'), 'hints': ('send', 'just'), 'correct_responses': ('I have just sent a fax to the customers.', )},
 		{'context': ('I ', ' to the personnel department this morning.'), 'hints': ('be', ), 'correct_responses': ('I have been to the personnel department this morning.', )},
 		{'context': ('I ', ' in Brussels for 5 years, but moved last year.'), 'hints': ('live', ), 'correct_responses': ('I lived in Brussels for 5 years, but moved last year.', )},
+	]
+}
+
+assoc_en_some_any = {
+	'instruction': 'Some or any?',
+	'items': [
+		("Have you got ", " money?"),
+		("I haven't got ", " wine bottles left."),
+	],
+	'classes': [
+		('some'),
+		('any'),
 	]
 }
