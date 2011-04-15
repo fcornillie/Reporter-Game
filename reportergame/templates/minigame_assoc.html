@@ -1,0 +1,26 @@
+﻿{% extends "minigame.html" %}
+
+{% block content %}
+
+	<div id="twitter">
+	<h2>{{ minigame.instruction }}</h2>
+	<div style="float:left;width:200px.">
+	INBOX
+	<ul>
+	{% for class in minigame.classes %}
+		<li>{{ class }}</li>
+	{% endfor %}
+	</ul>
+	</div>
+	
+	<div style="float:left;margin-left:200px;">
+	{% for item in minigame.items %}
+		<div class="item">{{ item|join:"..." }}</div>
+	{% endfor %}
+	</div>
+	
+	<div class="clearfloat"></div>
+	
+	</div>
+	
+{% endblock %}
