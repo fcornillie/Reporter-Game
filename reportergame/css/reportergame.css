@@ -174,3 +174,12 @@ div#twitter .text_enter {
 div#twitter span.hashtag {
 	color: blue;
 }
+
+div#byline {
+	padding: 10px 0 10px 0;
+	border-top: 1px solid grey;
+	border-bottom: 1px solid grey;
+}
+div#story div#text {
+	padding-top: 20px;
+}

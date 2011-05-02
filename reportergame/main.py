@@ -138,6 +138,53 @@ class get_player_leaderboard(webapp.RequestHandler):
 				leaderboard = leaderboard + "<div class=\"nick\" style=\'float:left;width:180px;\' ><a href='/profile?game=" + str(gamesession.game.key()) + "&amp;player=" + str(l.player.key()) + "'>" + l.player.nickname + "</a></div><div class=\"score\" style=\'float:left;width:40px;text-align:right;\'><b>" + str(l.absolutescore) + "</b></div><div style=\'clear:both;\'></div>"
 			self.response.out.write("<span style=\'font-weight:bold;\'>HIGH SCORES</span><br/>" + leaderboard)
 
+class profile(webapp.RequestHandler):
+	""" Updates the player's profile """
+	
+	@login_required
+	
+	def get(self):
+		player = get_current_player()
+		if player:
+			if self.request.get('avatar'):
+				player.avatar = db.Blob(self.request.get('avatar'))
+				player.put()
+				
+		# generate template
+		template_values = {
+			
+		}
+		
+		path = os.path.join(os.path.dirname(__file__), 'templates/player_detail.html')
+		self.response.out.write(template.render(path, append_base_template_values(template_values)))
+		
+	def post(self):
+		player = get_current_player()
+		logging.debug("*****" + player.nickname)
+		if player:
+			if self.request.get('avatar'):
+				avatar = self.request.get('avatar')
+				logging.debug("*****" + avatar)
+				player.avatar = db.Blob(avatar)
+				player.put()
+		self.redirect("/profile")
+
+class get_image(webapp.RequestHandler):
+	""" Gets the image data for a certain object.
+	
+	Requires:
+	+ object_key: the key of a certain object
+	+ image_property: the name of the Blob property.
+	"""
+	
+	def get(self):
+		from google.appengine.ext import db
+		object = db.Model.get(self.request.get('object_key'))
+		# image_data = object._properties[self.request.get('image_property')]
+		image_data = object.avatar
+		self.response.headers['Content-Type'] = 'image/jpeg'
+		self.response.out.write(image_data)
+		
 class MainHandler(webapp.RequestHandler):  
 	@login_required
 	def get(self):
@@ -159,6 +206,8 @@ def main():
 										('/game', get_game),
 										('/story', get_story),
 										('/minigame', get_minigame),
+										('/get_image',get_image),
+										('/profile', profile),
 								],
 											debug=True)
 

@@ -14,6 +14,7 @@ class Player(db.Model):
 	friends_list = db.ListProperty(db.Key)		# XX ListProperties are limited to 5000 entries
 	show_debug = db.BooleanProperty(default=False)
 	_is_admin = db.BooleanProperty(default=False)
+	avatar = db.BlobProperty()
 	
 	@property
 	def is_admin(self):
