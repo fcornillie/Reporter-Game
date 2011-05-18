@@ -1,0 +1,49 @@
+﻿{% extends "minigame.html" %}
+
+{% block content %}
+
+	<div id="twitter">
+		<h2>{{ minigame.instruction }}</h2>
+		{% for item in minigame.items %}
+			<div class="item" value="{{ item.value }}">
+				<div class="avatar"><img src="/img/characters/{{ item.character.1 }}" /></div>
+				<div class="message"><span style="color:#888;font-size:12px;">{{ item.character.0 }}</span><br/>{{ item.text }}</div>
+				<div class="clearfloat"></div></div>
+		{% endfor %}
+		
+		<script type="text/javascript">
+			$("div.item").hover(
+				function() {
+					if (!$(this).find('div.message').hasClass("retweeted")) {
+						$(this).addClass("retweet");
+					}
+				},
+				function() {
+					if (!$(this).find('div.message').hasClass("retweeted")) {
+						$(this).removeClass("retweet");
+					}
+				}
+			);
+			$("div.item").click(
+				function() {
+					if (!$(this).find('div.message').hasClass("retweeted")) {
+						// scoring
+						var value = parseFloat($(this).attr("value"));
+						var score_readers = parseFloat($("div#currencies div#readers span.score").html());
+						var new_score_readers = score_readers + value;
+						$("div#currencies div#readers span.score").html(new_score_readers);
+						
+						// some visual feedback
+						if(value==1) {
+							$(this).addClass("correct");
+						} else if(value==-1) {
+							$(this).addClass("incorrect");
+						}
+						$(this).removeClass("retweet");
+						$(this).find('div.message').addClass("retweeted");
+					}
+			});
+		</script>
+	</div>
+
+{% endblock %}

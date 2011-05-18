@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block header %}
+<a href="/game?game={{ game_key }}">
+<h1>{{ game.title }}</h1>
+<h2>{{ game.subtitle }}</h2>
+</a>
+{% endblock %}
+
+{% block content_right %}
+
+	{% include "block_player_score.html" %}
+	
+	<div id="stories" class="block">
+		<b>STORIES</b>
+		{% for story in game.stories %}
+			<div><a href="/story?story={{ story.key }}">{{ story.headline|truncatewords:5 }}</a></div>
+		{% endfor %}
+	</div>
+	
+	{% include "block_leaderboard.html" %}
+
+{% endblock %}
+
+
+{% block content %}
+<style>
+h2 {
+border-bottom:1px solid black;
+}
+</style>
+
+
+<div>
+	{% if game.teaser %}
+		<i>{{ game.teaser }}</i>
+	{% endif %}
+	
+	<div id="map_canvas" style="width:600px; height:450px"></div>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript">
+		function initMap() {
+			var latlng = new google.maps.LatLng({{ game.maps_location }});
+			var myOptions = {
+				zoom: {{ game.maps_zoom }},
+				center: latlng,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		
+		{% for s in game.stories %}
+			var latlng{{ forloop.counter }} = new google.maps.LatLng({{ s.maps_location }});
+			var Mmarker{{ forloop.counter }} = new google.maps.Marker({
+				position: latlng{{ forloop.counter }},
+				map: map,
+				title:"{{ s.headline }}"
+			});
+			infocontent{{ forloop.counter }} = "{{ s.headline }}";
+			var infowindow{{ forloop.counter }} = new google.maps.InfoWindow({
+				content: infocontent{{ forloop.counter }}
+			});
+			google.maps.event.addListener(Mmarker{{ forloop.counter }}, 'click', function() {
+				infowindow{{ forloop.counter }}.open(map,Mmarker{{ forloop.counter }});
+			});
+		{% endfor %}
+		}
+	
+		$(document).ready(function() {initMap();});
+	</script>
+</div>
+
+{% endblock %}

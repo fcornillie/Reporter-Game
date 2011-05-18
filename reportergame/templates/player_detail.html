@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block header %}
+<a href="/game?game={{ game_key }}">
+<h1>{{ story.game.title }}</h1>
+<h2>{{ story.game.subtitle }}</h2>
+</a>
+{% endblock %}
+
+{% block content_right %}
+
+	{% include "block_player_score.html" %}
+
+{% endblock %}
+
+
+{% block content %}
+{{ upload_url }}
+
+<form action="/profile" method="post" enctype="multipart/form-data">
+<img src="/get_image?object_key={{ player.key }}&amp;image_property=avatar" style="width:80px;height:80px;"/>
+{{ player.nickname }}
+	<br/>Update avatar <input type="file" name="avatar">
+	<input type="submit" value="update profile">
+</form>
+
+{% endblock %}
